@@ -15,6 +15,7 @@ public class RevisionNotesArrayAdapter extends ArrayAdapter<Note> {
 	ArrayList<Note> notes;
 	int resource;
 	ImageView iv1, iv2, iv3, iv4, iv5;
+	TextView tvNote;
 
 	public RevisionNotesArrayAdapter(Context context, int resource, ArrayList<Note> notes) {
 		super(context, resource, notes);
@@ -32,14 +33,37 @@ public class RevisionNotesArrayAdapter extends ArrayAdapter<Note> {
 
 		//Match the UI components with Java variables
 
-		Note note = notes.get(position);
 
+		iv1 = rowView.findViewById(R.id.imageView1star);
+		iv2 = rowView.findViewById(R.id.imageView2star);
+		iv3 = rowView.findViewById(R.id.imageView3star);
+		iv4 = rowView.findViewById(R.id.imageView4star);
+		iv5 = rowView.findViewById(R.id.imageView5star);
+		tvNote = rowView.findViewById(R.id.textViewNote);
+		Note note = notes.get(position);
+		int numofstars = note.getStars();
 		//Check if the property for starts >= 5, if so, "light" up the stars
-		if (/*stars >= 5*/) {
+		tvNote.setText(note.getNoteContent());
+		//Check if the property for starts >= 5, if so, "light" up the stars
+		if (numofstars >= 5) {
 			iv5.setImageResource(android.R.drawable.btn_star_big_on);
 			iv4.setImageResource(android.R.drawable.btn_star_big_on);
 			iv3.setImageResource(android.R.drawable.btn_star_big_on);
 			iv2.setImageResource(android.R.drawable.btn_star_big_on);
+			iv1.setImageResource(android.R.drawable.btn_star_big_on);
+		} else if (numofstars == 4) {
+			iv4.setImageResource(android.R.drawable.btn_star_big_on);
+			iv3.setImageResource(android.R.drawable.btn_star_big_on);
+			iv2.setImageResource(android.R.drawable.btn_star_big_on);
+			iv1.setImageResource(android.R.drawable.btn_star_big_on);
+		}  else if (numofstars == 3) {
+			iv3.setImageResource(android.R.drawable.btn_star_big_on);
+			iv2.setImageResource(android.R.drawable.btn_star_big_on);
+			iv1.setImageResource(android.R.drawable.btn_star_big_on);
+		} else if (numofstars == 2) {
+			iv2.setImageResource(android.R.drawable.btn_star_big_on);
+			iv1.setImageResource(android.R.drawable.btn_star_big_on);
+		} else {
 			iv1.setImageResource(android.R.drawable.btn_star_big_on);
 		}
 
